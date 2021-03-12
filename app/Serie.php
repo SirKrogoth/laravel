@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Serie extends Model
 {
-    //protected $table = 'series'; Laravel considera o nome da classe no plural e minuscula como nome da tabela
-    public $timestamps = false; //Laravel cria dois campos automaticamente, data de ultima atualizacao e data de criacao. No caso estamos setando para false./
+    public $timestamps = false;
     protected $fillable = ['nome'];
+
+    public function temporadas()
+    {
+        //Uma Série tem muitas temporadas
+        return $this->hasMany(Temporada::class);
+    }
 }

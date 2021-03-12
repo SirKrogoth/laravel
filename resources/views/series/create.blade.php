@@ -1,19 +1,40 @@
 @extends('layout')
 
 @section('cabecalho')
-Adicionar Séries
+    Adicionar Série
 @endsection
 
 @section('conteudo')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form method="post">
-    @csrf<!-- Isso aqui é um hash de segurança do Laravel, isso previne ataques onde o atacante pode tentar se passar pelo usuário. Neste caso o Laravel manda um hash, que se nao for respondido, será recusado -->
-    <div class="form-group">
-        <input type="text" class="form-control" name="nome" placeholder="Nome">   
+    @csrf
+    <div class="row">
+        <div class="col col-8">
+            <label for="nome" class="">Nome</label>
+            <input type="text" class="form-control" name="nome" id="nome">
+        </div>
+
+        <div class="col col-2">
+            <label for="qtd_temporadas">Temporadas</label>
+            <input type="number" class="form-control" name="qtd_temporadas" id="qtd_temporadas">
+        </div>
+
+        <div class="col col-2">
+            <label for="ep_por_temporada">Episódios</label>
+            <input type="number" class="form-control" name="ep_por_temporada" id="ep_por_temporada">
+        </div>
     </div>
 
-    <br />
-    <br />
-            
-    <button href="#" class="btn btn-primary">Criar</button>
+    <button class="btn btn-primary mt-2">Adicionar</button>
 </form>
 @endsection
